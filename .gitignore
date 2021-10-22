@@ -1,6 +1,7 @@
 
 #Exceptions
 !important.txt
+data/PennFudanPed
 
 
 
@@ -13,6 +14,7 @@
 
 ## Archiving only
 # The traditional archive format on Unix-like systems, now used mainly for the creation of static libraries.
+*.zip
 *.a
 *.ar
 # RPM files consist of metadata concatenated with (usually) a cpio archive. Newer RPM systems also support other archives, as cpio is becoming obsolete. cpio is also used with initramfs.
