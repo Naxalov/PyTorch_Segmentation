@@ -1,6 +1,7 @@
 """
 Plotting utils
 """
+import torch
 import torchvision.transforms.functional as F
 
 from PIL import Image
@@ -8,10 +9,39 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
 
+from torchvision.utils import draw_segmentation_masks
+
 
 # sample_image_path
 MAKS_DIR = Path('data/PennFudanPed/PedMasks')
 MASK_LIST = list(MAKS_DIR.glob('*.png'))
+def plot_segmentation_map(dataset,save=False,fname='seg_map'):
+    """Dataset img plot
+
+    """
+    plt.figure(figsize=(4,14))
+    fig,ax = plt.subplots(nrows=len(dataset),ncols=2,squeeze=True)
+
+    for idx,data in enumerate(dataset):
+        img,mask = data
+        img = F.to_pil_image(img)
+        mask= F.to_pil_image(mask)
+
+        ax[idx,0].imshow(img)
+        ax[idx,0].set(xticklabels=[], yticklabels=[], xticks=[], yticks=[])
+        ax[idx,1].imshow(mask)
+        ax[idx,1].set(xticklabels=[], yticklabels=[], xticks=[], yticks=[])
+        # plt.show()
+    # plt.tight_layout()
+    plt.subplots_adjust(wspace=0, hspace=0.05)
+    if save:
+        plt.savefig(fname=f'{fname}.jpg',dpi=100,bbox_inches='tight')
+    else:
+        plt.show()
+
+
+
+
 
 def show_segmentation_masks(path,save=False,fname='mask'):
     """Plot maskDraws segmentation masks on given RGB image. 
@@ -20,6 +50,7 @@ def show_segmentation_masks(path,save=False,fname='mask'):
     Args:
         path ([type]): [description]
     """
+
     img = Image.open(path).convert("RGB")
     mask = np.array(img)
     obj_ids = np.unique(img)
