@@ -23,7 +23,12 @@ PennFudanPed/
     FudanPed00003.png
     FudanPed00004.png
 ```
+### **segmentation masks**
 ![mask](images/mask.png)
+![imag](images/img.png)
+
+### **transforms**
+![seg_map](images/seg_map.jpg)
 ## Installing dependencies
 ### Using pip
 ```
